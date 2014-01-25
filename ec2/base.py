@@ -80,7 +80,7 @@ class objects_base(object):
         """
         qs = cls.all()
         for key in kwargs:
-            qs = filter(lambda i: make_compare(key, kwargs[key], i), qs)
+            qs = filter(lambda i: i is not None, filter(lambda i: make_compare(key, kwargs[key], i), qs))
         return qs
 
     @classmethod

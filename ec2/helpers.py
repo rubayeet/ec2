@@ -36,6 +36,9 @@ class Compare(object):
                     if key == tag.lower():
                         return obj.tags[tag] == value
             # There is no tag found either
+            if key == 'name':
+                #'name' is an optional tag, raising AttributeError thwarts lookup
+                return
             raise e
 
     @staticmethod
@@ -50,6 +53,9 @@ class Compare(object):
                     if key == tag.lower():
                         return obj.tags[tag].lower() == value
             # There is no tag found either
+            if key == 'name':
+                #'name' is an optional tag, raising AttributeError thwarts lookup
+                return
             raise e
 
     @staticmethod
@@ -66,6 +72,9 @@ class Compare(object):
                     if key == tag.lower():
                         return bool(value.match(obj.tags[tag]))
             # There is no tag found either
+            if key == 'name':
+                #'name' is an optional tag, raising AttributeError thwarts lookup
+                return            
             raise e
     # Django alias
     regex = like
@@ -87,6 +96,9 @@ class Compare(object):
                     if key == tag.lower():
                         return value in obj.tags[tag]
             # There is no tag found either
+            if key == 'name':
+                #'name' is an optional tag, raising AttributeError thwarts lookup
+                return            
             raise e
 
     @staticmethod
@@ -101,6 +113,9 @@ class Compare(object):
                     if key == tag.lower():
                         return value in obj.tags[tag]
             # There is no tag found either
+            if key == 'name':
+                #'name' is an optional tag, raising AttributeError thwarts lookup
+                return            
             raise e
 
     @staticmethod
@@ -114,6 +129,9 @@ class Compare(object):
                     if key == tag.lower():
                         return obj.tags[tag].startswith(value)
             # There is no tag found either
+            if key == 'name':
+                #'name' is an optional tag, raising AttributeError thwarts lookup
+                return            
             raise e
 
     @staticmethod
@@ -128,6 +146,9 @@ class Compare(object):
                     if key == tag.lower():
                         return obj.tags[tag].lower().startswith(value)
             # There is no tag found either
+            if key == 'name':
+                #'name' is an optional tag, raising AttributeError thwarts lookup
+                return
             raise e
 
     @staticmethod
@@ -141,6 +162,9 @@ class Compare(object):
                     if key == tag.lower():
                         return obj.tags[tag].endswith(value)
             # There is no tag found either
+            if key == 'name':
+                #'name' is an optional tag, raising AttributeError thwarts lookup
+                return            
             raise e
 
     @staticmethod
@@ -155,6 +179,9 @@ class Compare(object):
                     if key == tag.lower():
                         return obj.tags[tag].lower().endswith(value)
             # There is no tag found either
+            if key == 'name':
+                #'name' is an optional tag, raising AttributeError thwarts lookup
+                return
             raise e
 
     @staticmethod
