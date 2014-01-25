@@ -53,3 +53,23 @@ class credentials(object):
             cls.SECRET_ACCESS_KEY = row['Secret Access Key']
         except KeyError:
             raise IOError('Invalid credentials format')
+
+    @classmethod
+    def from_botoconfig(cls, fail_silently=False):
+        """
+        Load ACCESS_KEY_ID, SECRET_ACCESS_KEY and REGION_NAME from Boto Config 
+        file: http://boto.readthedocs.org/en/latest/boto_config_tut.html
+        """
+        import ConfigParser
+        try:
+            cfg = ConfigParser.ConfigParser()
+            cfg.read(['/etc/boto', os.path.expanduser('~/.boto')])
+            cls.ACCESS_KEY_ID = cfg.get('Credentials', 'aws_access_key_id')
+            cls.SECRET_ACCESS_KEY = cfg.get('Credentials', 'aws_secret_access_key')
+
+            if cfg.has_option('Boto', 'ec2_region_name'):
+                cls.REGION_NAME = cls.get('Boto', 'ec2_region_name')
+        except ConfigParser.Error:
+            #TODO - handle specific errors, provide helpful messages
+            if not fail_silently:
+                raise
